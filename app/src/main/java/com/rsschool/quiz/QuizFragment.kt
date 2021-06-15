@@ -124,7 +124,7 @@ class QuizFragment : Fragment() {
             binding.previousButton.callOnClick()
         }
 
-        activity?.onBackPressedDispatcher?.addCallback(
+        activity?.onBackPressedDispatcher?.addCallback( //system back button
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -135,13 +135,13 @@ class QuizFragment : Fragment() {
 
         getQuestion()
 
-        binding.nextButton.setOnClickListener {
+        binding.nextButton.setOnClickListener { //next question on button click
             splash()
             numberOfQuestion++
             queryForNextButton(sharedViewModel)
         }
 
-        binding.previousButton.setOnClickListener {
+        binding.previousButton.setOnClickListener { //prev question on button click
             splash()
             if (numberOfQuestion == 1) {
                 it.isEnabled = false
@@ -172,35 +172,33 @@ class QuizFragment : Fragment() {
     }
 
     private fun processAnswer() {
-        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId -> //on changed radiobutton save choose in firestore
             if (activity != null) {
-                if (isInet(requireActivity())) {
+                if (isInet(requireActivity())) { //check internet status
                     binding.nextButton.isEnabled = true
                     val numberAnswer =
                         group.indexOfChild(binding.radioGroup.findViewById(checkedId) as View)
                     userAnswers[numberOfQuestion] = numberAnswer
                     userAnswersText[numberOfQuestion] =
                         (view?.findViewById<RadioButton>(checkedId))?.text.toString()
-                    val answer = mapOf(
+                    val answer = mapOf( //create map for firestore
                         numberOfQuestion.toString() to mapOf(
                             "numberAnswer" to numberAnswer,
                             "textAnswer" to (view?.findViewById<RadioButton>(checkedId))?.text.toString()
                         )
                     )
-
-
                     userAnswerDoc.get().addOnSuccessListener {
                         if (it.exists()) {
                             userAnswerDoc.update(
-                                answer
+                                answer //update answers in firestore if exist document
                             )
                         } else {
                             userAnswerDoc.set(
-                                answer
+                                answer //create answers in firestore if exist document
                             )
                         }
                     }
-                } else {
+                } else { //if no internet
                     Snackbar.make(
                         binding.root,
                         getString(R.string.txt_inet_status),
@@ -213,7 +211,7 @@ class QuizFragment : Fragment() {
     }
 
     private fun queryForNextButton(sharedViewModel: SharedViewModel) {
-        questionsRef.get(source).addOnCompleteListener { task ->
+        questionsRef.get(source).addOnCompleteListener { task -> //request firestore document
             if (task.isSuccessful) {
                 val questionsCol = task.result?.get("count").toString().toInt()
                 if (activity != null) {
@@ -261,18 +259,17 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun restoreCheck() {
+    private fun restoreCheck() { //restore checked in previous questions
         userAnswerDoc.get(source).addOnSuccessListener {
             if (it.exists()) {
-                userAnswerDoc.get(source).addOnCompleteListener { task ->
+                userAnswerDoc.get(source).addOnCompleteListener { task -> //get answers document for current user
                     if (task.isSuccessful) {
                         if (task.result?.get(numberOfQuestion.toString()) != null) {
                             val document =
                                 task.result?.get(numberOfQuestion.toString()) as Map<*, *>
                             if (document["numberAnswer"] != null) {
                                 val index = document["numberAnswer"].toString().toInt()
-                                (binding.radioGroup.getChildAt(index) as RadioButton).isChecked =
-                                    true
+                                (binding.radioGroup.getChildAt(index) as RadioButton).isChecked = true //set checked answer from document
                             }
                         }
                     }
@@ -281,18 +278,18 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun splash() {
+    private fun splash() { //for hide black screen on recreate activity
         val intent = Intent(activity, SplashActivity::class.java)
         startActivity(intent)
     }
 
-    fun isInet(activity: Activity): Boolean {
+    fun isInet(activity: Activity): Boolean { //che inet function
         val cm = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         return activeNetwork?.isConnectedOrConnecting == true
     }
 
-    override fun onDestroy() {
+    override fun onDestroy() { //retrieve old sharedViewModel on destroy activity
         if (!requireActivity().isFinishing) {
             val oldViewModel = obtainViewModel()
             numberOfQuestion = oldViewModel.getQuestionNumber()

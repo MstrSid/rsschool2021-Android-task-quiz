@@ -101,7 +101,7 @@ class ResultFragment : Fragment() {
         }
     }
 
-    private fun readRightAnswers(myCallback: (Map<Int, Int>) -> Unit) {
+    private fun readRightAnswers(myCallback: (Map<Int, Int>) -> Unit) { //request for right answers in Map
         questionsRef.get(source).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val map = mutableMapOf<Int, Int>()
@@ -115,7 +115,7 @@ class ResultFragment : Fragment() {
         }
     }
 
-    private fun readAnswers(myCallback: (Map<Int, String>) -> Unit) {
+    private fun readAnswers(myCallback: (Map<Int, String>) -> Unit) { //request for all answers in Map
         questionsRef.get(source).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val map = mutableMapOf<Int, String>()
