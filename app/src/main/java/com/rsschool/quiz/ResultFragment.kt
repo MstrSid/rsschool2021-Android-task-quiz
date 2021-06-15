@@ -19,7 +19,8 @@ import kotlin.system.exitProcess
 
 
 class ResultFragment : Fragment() {
-    private lateinit var binding: FragmentResultBinding
+    private var _binding: FragmentResultBinding? = null
+    private val binding get() = _binding!!
     private lateinit var communicator: Communicator
     private val dbQuestions = Firebase.firestore
     private val questionsRef = dbQuestions.collection("quiz").document("questions")
@@ -31,7 +32,7 @@ class ResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
+        _binding =
             FragmentResultBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -126,6 +127,11 @@ class ResultFragment : Fragment() {
                 myCallback(map.toMap())
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

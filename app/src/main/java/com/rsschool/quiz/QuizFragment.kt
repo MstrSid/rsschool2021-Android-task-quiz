@@ -21,10 +21,12 @@ import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.rsschool.quiz.databinding.FragmentQuizBinding
+import com.rsschool.quiz.databinding.FragmentResultBinding
 
 
 class QuizFragment : Fragment() {
-    private lateinit var binding: FragmentQuizBinding
+    private var _binding: FragmentQuizBinding? = null
+    private val binding get() = _binding!!
     private val dbQuestions = Firebase.firestore
     private var userNumber: Long = 0
     private var numberOfQuestion: Int = 1
@@ -40,6 +42,7 @@ class QuizFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.i("lcl", "onCreateView")
         val sharedViewModel = obtainViewModel() //change theme and color status bar
         val theme = sharedViewModel.getQuestionNumber()
         var contextWrapper = ContextThemeWrapper(this.context, R.style.First)
@@ -89,13 +92,19 @@ class QuizFragment : Fragment() {
                 )
             }
         }
-        binding =
-            FragmentQuizBinding.inflate(inflater.cloneInContext(contextWrapper), container, false)
+
+            _binding =
+                FragmentQuizBinding.inflate(
+                    inflater.cloneInContext(contextWrapper),
+                    container,
+                    false
+                )
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.i("lcl", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         val sharedViewModel = obtainViewModel()
         communicator = activity as Communicator
@@ -105,6 +114,8 @@ class QuizFragment : Fragment() {
         userAnswersText = sharedViewModel.getUserAnswersText()
         userAnswerDoc = dbQuestions.collection("quiz").document("userAnswers$userNumber")
         Utils.onActivityCreateSetTheme(requireActivity())
+
+        _binding?.toString()?.let { Log.i("lcl", it) }
 
         binding.previousButton.isEnabled = numberOfQuestion > 1
         if (numberOfQuestion == 1) binding.toolbar.navigationIcon = null
@@ -123,8 +134,6 @@ class QuizFragment : Fragment() {
 
 
         getQuestion()
-
-
 
         binding.nextButton.setOnClickListener {
             splash()
@@ -220,6 +229,7 @@ class QuizFragment : Fragment() {
                         getQuestion()
                     } else {
                         communicator.passToResult(userNumber, userAnswers, userAnswersText)
+                        _binding = null
                     }
                 }
             }
