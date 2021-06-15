@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Quiz</string>
     <string name="txt_submit">Проверить</string>
     <string name="txt_next">Далее</string>
     <string name="txt_previous">Назад</string>

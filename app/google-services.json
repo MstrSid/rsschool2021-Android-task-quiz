@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "426987389873",
+    "firebase_url": "https://rs-quiz-f1076-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "rs-quiz-f1076",
+    "storage_bucket": "rs-quiz-f1076.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426987389873:android:76d7acd2f8eae79acfb390",
+        "android_client_info": {
+          "package_name": "by.kos.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426987389873-vp6on1h4l34djst1irc29o491e6luoiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVUU4Df2N26xq6t_plFMhm4QFC7t-G8Xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426987389873-vp6on1h4l34djst1irc29o491e6luoiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426987389873:android:a19aca8840eeadddcfb390",
+        "android_client_info": {
+          "package_name": "com.rsschool.quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426987389873-vp6on1h4l34djst1irc29o491e6luoiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVUU4Df2N26xq6t_plFMhm4QFC7t-G8Xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426987389873-vp6on1h4l34djst1irc29o491e6luoiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
