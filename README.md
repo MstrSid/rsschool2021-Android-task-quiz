@@ -1,3 +1,34 @@
+Внимание.
+Если исходники по каким-то причинам не компилируются, в репозитории есть готовый apk release файл.
+
+Ўвага.
+Калі зыходнікі па нейкіх прычынах не кампілююцца, у рэпазітары ёсць гатовы apk release файл.
+
+Attention.
+If the sources are not compiled for some reason, there is a ready apk release file in the repository.
+
+Achtung.
+Wenn die Quellen aus irgendeinem Grund nicht kompiliert wurden, befindet sich im Repository eine fertige APK-Release-Datei.
+
+Увага.
+Якщо вихідні з якихось причин не компілюються, в репозиторії є готовий apk release файл.
+
+注意力。
+如果由於某種原因未編譯源代碼，則存儲庫中有一個現成的 apk 發布文件。
+
+注意。
+何らかの理由でソースがコンパイルされていない場合は、リポジトリに準備ができたapkリリースファイルがあります。
+
+Huomio.
+Jos lähteitä ei käännetä jostain syystä, arkistossa on valmis apk-julkaisutiedosto.
+
+Uwaga.
+Jeśli źródła nie są z jakiegoś powodu skompilowane, w repozytorium znajduje się gotowy plik wydania apk.
+
+Dėmesio.
+Jei šaltiniai dėl kokių nors priežasčių nėra kompiliuojami, saugykloje yra paruoštas apk išleidimo failas.
+
+------------------------------------------------------------------------------------------------------------
 # rsschool2021-Android-task-quiz
 Rolling Scopes School - Android 2021 - Stage 1 - Task 2 - Quiz
 
